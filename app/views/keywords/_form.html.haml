@@ -1,0 +1,13 @@
+%h1 Keyword
+
+= simple_form_for [@client,@website, @keyword], :html => {:multipart => true, :class => 'form-horizontal' } do |f|
+
+  = #render 'shared/form_errors', :f => f
+
+  = f.input :keyword_phrase
+  
+  .well.actions
+    = f.button :submit, :class => 'btn-primary', :disable_with => "Saving..."
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), "javascript:history.back()", :class => 'btn'
+    - unless @keyword.new_record?
+      = link_to 'Destroy', client_website_keyword_path(@client,@website, @keyword), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"

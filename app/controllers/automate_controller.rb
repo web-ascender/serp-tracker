@@ -1,0 +1,2 @@
+class AutomateController < ApplicationController
+end

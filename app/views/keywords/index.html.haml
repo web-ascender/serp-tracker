@@ -1,0 +1,17 @@
+%h1 Keywords
+
+= link_to "Add Keyword", new_client_website_keyword_path, :class => "btn btn-success"
+
+%br
+%br
+
+%table.table-bordered.table-striped
+  %thead
+    %tr
+      %th Edit
+      %th Keyword Phrase
+  %tbody
+    - @keywords.each do |keyword|
+      %tr
+        %td= link_to "Edit", edit_client_website_keyword_path(@client,@website,keyword)
+        %td= keyword.keyword_phrase

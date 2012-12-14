@@ -1,0 +1,21 @@
+%h1 Websites
+
+= link_to "Add Website", new_client_website_path, :class => "btn btn-success"
+
+%br
+%br
+
+%table.table-bordered.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Keywords
+      %th Name
+      %th URL
+  %tbody
+    - @websites.each do |website|
+      %tr
+        %td= link_to "Edit", edit_client_website_path(@client,website)        
+        %th= link_to "Keywords", client_website_keywords_path(@client, website)
+        %td= website.name
+        %td= website.url

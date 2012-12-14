@@ -1,0 +1,14 @@
+%h1 Website Information
+
+= simple_form_for [@client,@website], :html => {:multipart => true, :class => 'form-horizontal' } do |f|
+
+  = #render 'shared/form_errors', :f => f
+
+  = f.input :name
+  = f.input :url
+  
+  .well.actions
+    = f.button :submit, :class => 'btn-primary', :disable_with => "Saving..."
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), "javascript:history.back()", :class => 'btn'
+    - unless @website.new_record?
+      = link_to 'Destroy', client_website_path(@client,@website), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"

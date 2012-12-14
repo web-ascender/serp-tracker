@@ -1,0 +1,17 @@
+%h1 Client Information
+
+= simple_form_for @client, :html => {:multipart => true, :class => 'form-horizontal' } do |f|
+
+  = #render 'shared/form_errors', :f => f
+
+  = f.input :name
+  = f.input :description
+  = f.input :contact_name
+  = f.input :contact_email
+  = f.input :contact_phone
+
+  .well.actions
+    = f.button :submit, :class => 'btn-primary', :disable_with => "Saving..."
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), "javascript:history.back()", :class => 'btn'
+    - unless @client.new_record?
+      = link_to 'Destroy', client_path(@client), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"
