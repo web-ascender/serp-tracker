@@ -1,0 +1,17 @@
+= raw(@output)
+
+%table.table-bordered.table.table-striped
+  %thead
+    %tr
+      %td #
+      %td Title
+  %tbody
+    - @results.each_with_index do |result,i|
+      %tr
+        %td=i
+        %td
+          =result[:title]          
+          %br
+          %small
+            =result[:url]
+          = result[:page] if result[:page].present?
