@@ -5,10 +5,11 @@
 %br
 %br
 
-%table.table-bordered.table-striped
+%table.table-bordered.table-striped{:style => "width:100%"}
   %thead
     %tr
       %th Edit
+      %th Sites 
       %th Name
       %th Contact
       %th Email
@@ -17,7 +18,7 @@
     - @clients.each do |client|
       %tr
         %td= link_to "Edit", edit_client_path(client)
-        %td= link_to "Websites", client_websites_path(client)
+        %td= link_to "Websites (#{client.websites.count})", client_websites_path(client)
         %td= client.name
         %td= client.contact_name
         %td= client.contact_email

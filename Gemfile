@@ -13,8 +13,13 @@ gem 'devise'
 gem 'simple_form'
 gem 'capybara'
 gem 'capybara-webkit'
+#comes with Nokogiri?
+
 # Gems used only for assets and not required
 # in production environments by default.
+
+gem 'liquid'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -23,6 +28,17 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+end
+
+group :development, :test do
+  gem 'debugger'
+  gem 'taps'
+  gem 'annotate'
+  gem 'quiet_assets'
+  gem 'rspec-rails'  
+  gem 'launchy'
+  gem 'database_cleaner'  
+  gem 'factory_girl_rails'
 end
 
 gem 'jquery-rails'

@@ -29,8 +29,6 @@
           .container.nav-collapse
             %ul.nav
               %li= link_to "Clients", clients_path
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
               - if current_user
                 %li= link_to "Logout", destroy_user_session_path, :method => :delete
               - else
@@ -40,21 +38,21 @@
 
     .container{:style => "padding-top:50px"}
       .row
-        .span9
+        .span12
           = bootstrap_flash
           -if notice.present?
             .notice= notice 
           -if alert.present?
             .alert= alert
           = yield
-        .span3
-          .well.sidebar-nav
-            %h3 Sidebar
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
+        / .span3
+        /   .well.sidebar-nav
+        /     %h3 Sidebar
+        /     %ul.nav.nav-list
+        /       %li.nav-header Sidebar
+        /       %li= link_to "Link 1", "/path1"
+        /       %li= link_to "Link 2", "/path2"
+        /       %li= link_to "Link 3", "/path3"
     
       %footer
         %p &copy; Company 2012

@@ -1,13 +1,14 @@
 # == Schema Information
 #
-# Table name: keywords
+# Table name: keyword_results
 #
-#  id             :integer          not null, primary key
-#  website_id     :integer
-#  keyword_phrase :string(255)
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  position       :integer
+#  id            :integer          not null, primary key
+#  keyword_id    :integer
+#  search_engine :string(255)
+#  position      :integer
+#  html          :text
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

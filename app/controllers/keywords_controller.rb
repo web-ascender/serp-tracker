@@ -1,6 +1,6 @@
 class KeywordsController < ApplicationController
   before_filter :set_client
-  
+  before_filter :set_website
 
   def index
     @keywords = @website.keywords    
@@ -39,12 +39,5 @@ class KeywordsController < ApplicationController
     redirect_to client_website_keywords_path(@client,@website), notice: "Keyword removed"
   end
 
-  def set_client
-    @client = current_user.clients.find(params[:client_id])
-    set_website
-  end
-  def set_website
-    @website = @client.websites.find(params[:website_id])
-  end
 
 end

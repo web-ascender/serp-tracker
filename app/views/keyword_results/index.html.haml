@@ -1,0 +1,10 @@
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %td Date
+      %td Position
+  %tbody
+    - @keyword_results.each do |keyword_result|
+      %tr
+        %td=keyword_result.created_at
+        %td=keyword_result.position

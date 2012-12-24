@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121214155537) do
+ActiveRecord::Schema.define(:version => 20121224161543) do
 
   create_table "clients", :force => true do |t|
     t.integer  "user_id"
@@ -24,11 +24,29 @@ ActiveRecord::Schema.define(:version => 20121214155537) do
     t.datetime "updated_at",    :null => false
   end
 
+  create_table "keyword_results", :force => true do |t|
+    t.integer  "keyword_id"
+    t.string   "search_engine"
+    t.integer  "position"
+    t.text     "html"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "keywords", :force => true do |t|
     t.integer  "website_id"
     t.string   "keyword_phrase"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "position"
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "url"
+    t.text     "html"
+    t.boolean  "analyzed",   :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "users", :force => true do |t|

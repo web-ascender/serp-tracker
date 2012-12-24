@@ -1,20 +1,19 @@
 # == Schema Information
 #
-# Table name: websites
+# Table name: keyword_results
 #
 #  id            :integer          not null, primary key
-#  client_id     :integer
-#  name          :string(255)
-#  url           :string(255)
-#  search_google :boolean          default(TRUE)
-#  search_bing   :boolean          default(TRUE)
+#  keyword_id    :integer
+#  search_engine :string(255)
+#  position      :integer
+#  html          :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
 
 require 'test_helper'
 
-class WebsiteTest < ActiveSupport::TestCase
+class KeywordResultTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -5,13 +5,15 @@
 %br
 %br
 
-%table.table-bordered.table-striped
+%table.table-bordered.table-striped{:style => "width:100%"}
   %thead
     %tr
       %th Edit
       %th Keyword Phrase
+      %th Position
   %tbody
     - @keywords.each do |keyword|
       %tr
         %td= link_to "Edit", edit_client_website_keyword_path(@client,@website,keyword)
-        %td= keyword.keyword_phrase
+        %td= link_to keyword.keyword_phrase, client_website_keyword_keyword_results_path(@client,@website,keyword)
+        %td= keyword.position

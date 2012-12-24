@@ -1,0 +1,2 @@
+module KeywordResultsHelper
+end

@@ -1,5 +1,8 @@
 namespace :serp do
   task :rank_keywords => :environment do    
-    puts "rank_keywords run..."
+    Keyword.all.each do |keyword|
+      spider = Scrape::Google.new      
+      spider.save_keyword_results(keyword.id)
+    end
   end
 end
