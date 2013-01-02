@@ -1,4 +1,9 @@
 %h1 Report
 
-- @report.pages.each do |p|
-  = render :partial => "page", :locals => { :page => p}
+- @report.pages.where(:analyzed => true).order(:depth).limit(50).each do |p|
+  = puts p.id
+  - begin
+    = render :partial => "page", :locals => { :page => p}
+  - rescue
+    = puts p.id  
+  %hr

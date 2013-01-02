@@ -12,7 +12,6 @@ class SourceReportsController < ApplicationController
   end
 
   def show
-    @report = @website.source_reports.find(params[:id])
-    
+    @report = @website.source_reports.find(params[:id])    
   end
 end

@@ -1,4 +1,5 @@
-%h2 Page
+%h2 
+  Page  
 %table.table-bordered.table-striped{:style => "width:100%"}
   %tbody
     %tr
@@ -6,7 +7,14 @@
         %strong
           Page:
       %td
-        = page.path
+        = page.url
+    %tr
+      %td
+        %strong
+          Title
+      %td
+        %small
+          = page.title
     %tr
       %td
         %strong
@@ -118,9 +126,116 @@
 
       %td        
         = keyword_density_total > 2 ? pass : fail
-
-
-
+    %tr
+      %td
+        %strong
+          Heading 1 
+        %br
+        Good HTML markup uses &lt;h1&gt; tag to identify the primary focus of the page. You should have 1 and only 1 h1 per page.
+      %td
+        - page.h1s.each_with_index do |h,i|
+          = "#{i+1}. #{h}"
+      %td
+        = page.h1s.count == 1 ? pass : fail
+    %tr
+      %td
+        %strong
+          Heading 2 and 3
+        %br
+        Good HTML markup uses additional heading tags to note other critical items on the page. Each page on your site should have at least 1 h2.
+      %td
+        - page.h2s.each_with_index do |h,i|
+          = "#{i+1}. #{h}"
+      %td
+        = page.h2s.count + page.h3s.count > 1 ? pass : fail
+    %tr
+      %td
+        %strong
+          Paragraphs of content
+        %br
+        Good HTML markup uses &lt;p&gt; to denote paragraphs of text. Each page on your site should have at least a couple paragraphs and be at least 200 words.
+      %td
+        = page.paragraphs.count
+        Paragraphs and 
+        = page.paragraphs.join(" ").split(" ").count
+        Words found within the paragraphs.
+      %td
+        = page.paragraphs.join(" ").split(" ").count > 300 ? pass : fail
+    %tr
+      %td
+        %strong
+          Tables
+        %br
+        Clean HTML markup should not require the use of tables for laying out or arranging your content.
+      %td
+        Tables 
+        = page.tables.count
+        - if page.has_nested_tables?
+          This page appears to use tables for laying out content. This is a bad web development practice and is not ideal for SEO or overall site usability.
+      %td
+        = page.has_nested_tables? ? fail : pass
+    %tr
+      %td
+        %strong
+          Javascript
+        %br
+        Using lots of in-line and on-page javascript slows your page down and makes it more difficult for search engines to figure out what is important on your page.
+      %td
+        Your page includes 
+        = page.javascript.length 
+        characters of javascript on the page.
+        - if page.javascript.length > 1000
+          That amount of on page javascript is excessive and your javascript should be moved into separate files so they can be cached and to speed page load times.
+      %td
+        = page.javascript_too_complex?(2000) ? fail : pass
+    %tr
+      %td
+        %strong
+          CSS
+        %br
+        Cascading Style Sheets controls the look and feel of your page. 
+      %td
+        This page has 
+        = page.inline_style_count
+        inline styles and 
+        = page.css.length 
+        characters of defined CSS.
+      %td
+        = (page.inline_style_count + page.css.length) > 10 ? fail : pass
+    %tr
+      %td
+        %strong
+          Navigation
+        %br
+        The primary navigation mark-up should use styled bulleted lists not javascript or tables.
+      %td
+        - if page.li_link_count > 0 
+          Your site appears to use bulleted lists for the navigation.
+        - else
+          No bulleted lists for navigation could be found on your page.
+      %td
+        = page.li_link_count > 0 ? pass : fail
+    %tr
+      %td
+        %strong
+          Caution Terms
+        There are some words such as "link exchange", "link trade" and other similar terms that could negatively affect your websites ranking.
+      %td
+        - if page.caution_words.count > 0
+          Following words found: 
+          = page.caution_words.join(" ")
+      %td
+        = page.caution_words.count == 0 ? pass : fail
+    %tr
+      %td
+        %strong
+          Website Statistics
+        It's recommended to use a 3rd party stats system such as Google Analytics
+      %td
+        - if page.has_stats?
+          3rd party statistics system found.
+      %td
+        = page.has_stats? ? pass : fail
 :javascript
   $(document).ready(function(){
     $('.closed').toggle();

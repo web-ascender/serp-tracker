@@ -13,6 +13,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'capybara'
 gem 'capybara-webkit'
+gem 'curb'
 #comes with Nokogiri?
 
 # Gems used only for assets and not required
