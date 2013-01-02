@@ -1,0 +1,15 @@
+%h1 Source Reports
+
+= link_to "Add Report", new_client_website_source_report_path, :class => "btn btn-success"
+
+%br
+%br
+
+%table.table-bordered.table-striped{:style => "width:100%"}
+  %thead
+    %tr
+      %th Date
+  %tbody
+    - @reports.each do |report|
+      %tr
+        %td= link_to report.created_at, client_website_source_report_path(@client,@website,report)

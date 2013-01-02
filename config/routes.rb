@@ -3,6 +3,7 @@ SerpTracker::Application.routes.draw do
 
   resources :clients do
     resources :websites do 
+      resources :source_reports
       resources :keywords do 
         resources :keyword_results
       end

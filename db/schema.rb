@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224161543) do
+ActiveRecord::Schema.define(:version => 20121224234253) do
 
   create_table "clients", :force => true do |t|
     t.integer  "user_id"
@@ -42,11 +42,18 @@ ActiveRecord::Schema.define(:version => 20121224161543) do
   end
 
   create_table "pages", :force => true do |t|
+    t.integer  "source_report_id"
     t.string   "url"
     t.text     "html"
-    t.boolean  "analyzed",   :default => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.boolean  "analyzed",         :default => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
+
+  create_table "source_reports", :force => true do |t|
+    t.integer  "website_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

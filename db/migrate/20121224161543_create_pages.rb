@@ -1,6 +1,7 @@
 class CreatePages < ActiveRecord::Migration
   def change
     create_table :pages do |t|
+      t.belongs_to :source_report
       t.string :url
       #t.string :path
       #t.string :title

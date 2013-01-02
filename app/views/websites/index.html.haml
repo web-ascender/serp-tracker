@@ -17,5 +17,6 @@
       %tr
         %td= link_to "Edit", edit_client_website_path(@client,website)        
         %th= link_to "Keywords (#{website.keywords.count})", client_website_keywords_path(@client, website)
+        %th= link_to "Source reports(#{website.source_reports.count})",client_website_source_reports_path(@client,website)
         %td= website.name
         %td= website.url

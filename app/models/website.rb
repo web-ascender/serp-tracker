@@ -15,6 +15,7 @@
 class Website < ActiveRecord::Base
   belongs_to :client
   has_many :keywords
+  has_many :source_reports
   
   attr_protected :id
 

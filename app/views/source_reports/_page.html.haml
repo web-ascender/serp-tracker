@@ -1,0 +1,132 @@
+%h2 Page
+%table.table-bordered.table-striped{:style => "width:100%"}
+  %tbody
+    %tr
+      %td
+        %strong
+          Page:
+      %td
+        = page.path
+    %tr
+      %td
+        %strong
+          Calculated Keywords
+      %td
+        %small
+          = page.assume_keywords.join(", ")
+
+%h3 Analysis
+%table.table-bordered.table-striped{:style => "width:100%"}
+  %thead
+    %tr
+      %th Metric Analyzed
+      %th Details
+      %th Score
+  %tbody
+    %tr
+      %td 
+        %strong
+          Title Focus
+        %br
+        Measures the complexity of the page &lt;title&gt; A good page title focuses on 2 or 3 key terms separated by a |
+      %td        
+        Terms:
+        = page.title_focus.count   
+        = page.title_focus
+      %td
+        - if page.title_focus.count < 2
+          = fail
+        - elsif page.title_focus.count < 4
+          = pass
+        - else
+          = fail          
+    %tr
+      %td 
+        %strong
+          Title Density
+        %br
+        Measures the use of title terms within the sites content. It is recommended that your score be 8 or higher.
+      %td
+        Title terms used a total of 
+        = page.title_density
+        times
+      %td
+        = page.title_density < 8 ? fail : pass 
+    %tr
+      %td
+        %strong
+          URL Complexity
+        %br
+        It's important that your actual page URL is simple and descriptive.
+      %td
+        Page URL: 
+        = page.url
+        - if page.path_too_complex?
+          Your page URL may be too long, be too deep, or have complex characters.
+      %td
+        = page.path_too_complex? ? fail : pass
+    %tr
+      %td
+        %strong
+          Alt Image Text
+        %br
+        It's important to add descriptive text to accompany the images on your website.
+      %td        
+        = page.image_count
+        Images,
+        = page.alt_image_text.count
+        Images with alt text        
+        = (page.alt_image_text.count.to_f / page.image_count.to_f * 100).round(0) 
+        percent
+        = link_to "Details","#", :class => "toggle_down"
+        %br
+        %small.closed
+          = page.alt_image_text
+      %td
+        =(page.alt_image_text.count.to_f / page.image_count.to_f * 100) < 90 ? fail : pass
+    %tr
+      %td
+        %strong
+          Image naming
+        %br
+        Naming images on your site after key terms is a good SEO practice
+      %td
+        = page.image_name_density
+        mentions of assumed keywords in your page images.    
+        = link_to "Details","#", :class => "toggle_down"
+        %br
+        %small.closed
+          = page.image_names
+      %td
+        = page.image_name_density < 1 ? fail : pass
+    %tr
+      %td
+        %strong
+          Keyword Density
+        %br
+        Terms you are trying to rank for should be used throughout your page. 
+      %td
+        - keyword_density_total = 0
+        - page.assume_keywords.each do |k|
+          - if page.find_phrase(k) >= 3
+            %span.label.label-success
+              = "#{k} (#{page.find_phrase(k)})"
+              - keyword_density_total += 1
+          - else
+            %span.label.label-important
+              = "#{k} (#{page.find_phrase(k)})"
+
+      %td        
+        = keyword_density_total > 2 ? pass : fail
+
+
+
+:javascript
+  $(document).ready(function(){
+    $('.closed').toggle();
+
+    $('.toggle_down').click(function(){
+      $(this).siblings('.closed').toggle();
+    });
+        
+  });

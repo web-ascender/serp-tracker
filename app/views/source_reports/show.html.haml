@@ -1,0 +1,4 @@
+%h1 Report
+
+- @report.pages.each do |p|
+  = render :partial => "page", :locals => { :page => p}
